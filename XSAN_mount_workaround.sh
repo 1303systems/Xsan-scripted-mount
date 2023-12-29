@@ -40,13 +40,13 @@ function reload_xsan {
     launchctl unload /System/Library/LaunchDaemons/com.apple.xsan.plist || true
     sleep 1
     launchctl load -w /System/Library/LaunchDaemons/com.apple.xsan.plist
+    sleep 5
     xsanctl mount QSAN
-    sleep 1
     if [ $? -eq 0 ]; then
         echo "Successfully restarted com.apple.xsan"
         return 0
     else
-        echo "Failed to restart com.apple.xsan"
+        echo "Failed to restart com.apple.xsan. Manually reload it and try again."
         return 1
     fi
 }
