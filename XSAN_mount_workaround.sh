@@ -31,6 +31,7 @@ function xsan_manual_mount {
     else
         echo "$mount_point is empty! Failed to mount QSAN"
         return 1
+    fi
 }
 
 function reload_xsan {
