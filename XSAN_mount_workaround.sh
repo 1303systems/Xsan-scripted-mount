@@ -8,6 +8,8 @@ latest_log=$(ls -1 $xsan_logging_directory | grep '^mount-debug\.[0-9]\+$' | sor
 xsan_mount_error="Unrecognized option: 'owners'"
 mount_point="/Volumes/QSAN"
 
+echo "Latest log is $latest_log"
+
 # Check if any log files were found
 if [ -n "$latest_log" ]; then
     # Checks for mount error in $latest_log without spamming the entire log file :)
@@ -26,13 +28,12 @@ if [ -n "$latest_log" ]; then
         /System/Library/Filesystems/acfs.fs/Contents/bin/mount_acfs -o rw -o nofollow /dev/$xsan_disk $mount_point
         if [ $? -eq 0 ]; then
             echo "Succesfully connected to $mount_point"
-            return 0
         else
             echo "Failed to connect to $mount_point"
-            return 1
         fi
+    else
+        echo "No mount error found in $xsan_logging_directory/$latest_log. Is XSAN service running?"
     fi
 else
-    echo "No log files found in $xsan_logging_directory"
-    return 1
+    echo "No log files found in $xsan_logging_directory. Is XSAN service running?"
 fi
