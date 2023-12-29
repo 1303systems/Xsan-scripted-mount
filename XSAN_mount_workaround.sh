@@ -73,7 +73,7 @@ if [ -n "$latest_log" ]; then
             else
                 echo "$mount_point is empty!"
                 # Checks if $mount_point is mounted
-                if mount | grep -q "$mount_point"
+                if mount | grep -q "$mount_point"; then
                     echo  "$mount_point is somehow empty yet still mounted. Unmounting."
                     umount "$mount_point"
                 else
