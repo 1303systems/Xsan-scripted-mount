@@ -4,6 +4,7 @@
 # This is a workaround for a bug introduced in MacOS 12.7.2+, 13.6.2+ 14.2+
 
 xsan_logging_directory="/Library/Logs/Xsan/debug/"
+# Check xsan_logging_directory for mount-debug.xxxx log files for the most recent
 latest_log=$(ls -1 $xsan_logging_directory | grep '^mount-debug\.[0-9]\+$' | sort -t. -k2 -n | tail -n 1)
 xsan_mount_error="Unrecognized option: 'owners'"
 mount_point="/Volumes/QSAN"
